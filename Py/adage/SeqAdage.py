@@ -79,7 +79,8 @@ class SeqAdage(ad.Adage):
             lr (flt): Learning rate, 0-1
             v (int): Verbose, 1-True, 0-False
         """
-        self.autoencoder = lae.LinkedAE(enc_dim, act2, dropout,kl1,kl2,init)
+        self.autoencoder = lae.LinkedAE(enc_dim, act2, dropout,kl1,kl2,init, act1=act)
+        self.act1 = act
         self.all_comp = pd.read_csv(input_file, index_col=0)
         self.gene_num = np.size(self.all_comp, 0)
         self.encoding_dim = enc_dim
@@ -187,7 +188,7 @@ class SeqAdage(ad.Adage):
         x_train, x_train_noisy = self.prep_data()
 
         # initialize a new data with new input shape
-        autoencoder2 = lae.LinkedAE(self.encoding_dim, self.act, self.dropout,self.kl1,self.kl2,self.init)
+        autoencoder2 = lae.LinkedAE(self.encoding_dim, self.act, self.dropout,self.kl1,self.kl2,self.init, act1=self.act1)
         optim = optimizers.SGD(learning_rate=self.lr, momentum=self.mm) # lr=0.001, rho=0.95, epsilon=1e-07
         autoencoder2.compile(optimizer=optim, 
                         loss=losses.MeanSquaredError()) #BinaryCrossentropy(from_logits=False)) 

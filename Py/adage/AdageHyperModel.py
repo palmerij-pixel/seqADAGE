@@ -70,7 +70,7 @@ class AdageHyperModel(kt.HyperModel):
         #model = models.Model(inputs=inputs, outputs=x)
 
         #model = keras.models.Sequential()
-        model = lae.LinkedAE(enc_dim, act2, dropout,kl1,kl2,init)
+        model = lae.LinkedAE(enc_dim, act2, dropout,kl1,kl2,init, act1=act1)
 
         '''
         dense_1 = keras.layers.Dense(encoding_dim, activation=act1,

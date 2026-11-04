@@ -35,7 +35,7 @@ class LinkedAE(keras.models.Sequential):
 
     """
 
-    def __init__(self, encoding_dim = 10, act2="tanh", d=0,kl1=0,kl2=0,init="tanh" ):
+    def __init__(self, encoding_dim = 10, act2="tanh", d=0,kl1=0,kl2=0,init="tanh", act1=None):
         """
         LinkedAE is a class for a linked, tied-weights autoencoder. It inherits
         the keras Sequential class.
@@ -44,9 +44,10 @@ class LinkedAE(keras.models.Sequential):
             encoding_dim (int): Encoding dimensions, nodes in hidden layer
             act2 (str): The decoder activation function 
             d (flt): The proportion of input features to drop in dropout layer
+            act1 (str): The encoder activation function (None = linear, the old behavior)
         """
         super().__init__()
-        self.dense_1 = keras.layers.Dense(encoding_dim, kernel_regularizer = regularizers.l1_l2(l1=kl1, l2=kl2),
+        self.dense_1 = keras.layers.Dense(encoding_dim, activation=act1, kernel_regularizer = regularizers.l1_l2(l1=kl1, l2=kl2),
                                          kernel_initializer = init)
         self.d = keras.layers.Dropout(d)
         self.act2 = act2

@@ -125,13 +125,13 @@ class SeqAdage(ad.Adage):
         self.autoencoder.compile(optimizer=optim, 
                         loss=losses.MeanSquaredError()) #BinaryCrossentropy(from_logits=False)) 
 
-        history = self.autoencoder.fit(x=x_train, 
-                                  y=x_train_noisy, 
-                                  epochs=ep,
-                                  batch_size=self.batch_size,
-                                  #shuffle=True,
-                                  validation_split = 0.1,
-                                  verbose=self.v
+        history = self.autoencoder.fit(x=x_train_noisy,  
+                                  y=x_train,  
+                                  epochs=ep, 
+                                  batch_size=self.batch_size, 
+                                  #shuffle=True, 
+                                  validation_split = 0.1, 
+                                  verbose=self.v 
                                  )
         print("fitted")
         #self.autoencoder = autoencoder

@@ -68,12 +68,3 @@ The Slurm scripts run a notebook as a batch job; array task N handles model N (o
 | Section 4.2, quiet nodes and cluster sizes | `02_train_models`, `03_build_eadage`, `04_shap` |
 | Sections 4.3 to 4.5, median agreements | `05_compare`: `runs/results/summary.csv` and `summary_without_quiet.csv` |
 | Table 3 and the result figures | `06_tests_and_figures`: `runs/figures/` |
-
-## Changes to the lab's code
-
-The `Jordin` branch includes three corrections to the lab's code, which all results use:
-
-1. The encoder now applies its activation function (`tanh`) (`LinkedAE`, `SeqAdage`, `AdageHyperModel`).
-2. Training rebuilds the clean data from the noisy copy, not the other way round (`SeqAdage.train_model_variable`).
-3. Consensus clustering keeps its random state, so that the 10 subsamples differ, and saves each node's cluster
-   (`ensemble_construction/ensemble_construction_p_dcc.R`).

@@ -57,7 +57,9 @@ pcmHook <- function(dist, k) {
   # ConsensusClusterPlus.M
   #dist <- ff(as.matrix(dist), vmode = "double")
   print("ppam_begin")
+  rng_state <- get(".Random.seed", envir = .GlobalEnv)
   ppam_result <- Cluster_Medoids(dist, k, swap_phase= FALSE, threads=6, verbose=TRUE)
+  assign(".Random.seed", rng_state, envir = .GlobalEnv)
   assignment <- ppam_result$clusters
   print("ppam_end")
   return(assignment)
@@ -151,6 +153,9 @@ print("consensus clustering finished")
 print("merging node weights in the same cluster")
 cl_assignment <- as.data.frame(res[[2]][["consensusClass"]])
 colnames(cl_assignment) <- "cluster"
+dir.create(outfolder, showWarnings = FALSE)
+write.csv(cl_assignment, file.path(outfolder, paste0("net", nodeN, "_", model_count, "models_", begin, "_", end,
+          "_k=", k, "_seed=", cluster_seed, "_ClusterBy", method, "_clusters.csv")))
 combo_weight_t <- t(combo_weight)
 combo_weight_t_cl <- merge(combo_weight_t, cl_assignment, by = 0)
 

@@ -1,6 +1,6 @@
 # Does ensembling change what SHAP explains?
 
-Code for my CSC 499 honors thesis at Union College (advisor: Prof. Georgia Doing), *Ensembles of Neural Networks
+Code for my CSC 488 thesis at Union College (advisor: Prof. Georgia Doing), *Ensembles of Neural Networks
 Give More Reproducible Explanations of Gene Expression*.
 
 The pipeline trains 125 ADAGE models (denoising autoencoders) on an *E. coli* gene expression compendium, in five
